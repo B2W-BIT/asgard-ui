@@ -78,7 +78,6 @@ var AccountComponent = React.createClass({
 
   handleClickToken : function (accountClick, accounts, current) {
     AccountActions.requestToken(accountClick.id);
-
     const accountsList = accounts;
     accountsList.push(current);
     const accountsAppend = accountsList.filter(list => {
