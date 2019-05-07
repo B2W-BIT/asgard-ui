@@ -57,18 +57,6 @@ AppDispatcher.register(function (action) {
         action.data.status
       );
       break;
-    case AgentsEvents.REVERT:
-      storeData.agents =
-        removeDeployment(storeData.agents, action.deploymentId);
-      AgentsStore.emit(AgentsEvents.CHANGE);
-      break;
-    case AgentsEvents.REVERT_ERROR:
-      AgentsStore.emit(
-        AgentsEvents.REVERT_ERROR,
-        action.data.body,
-        action.data.status
-      );
-      break;
   }
 });
 
