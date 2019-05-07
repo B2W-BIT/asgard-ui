@@ -22,7 +22,6 @@ export default React.createClass({
       loadingBottom : false,
       loadingTop : false,
       topLog : 0,
-      control: 0,
     };
   },
   componentDidMount() {
