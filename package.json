@@ -2,7 +2,7 @@
   "name": "marathon-ui",
   "version": "1.3.0",
   "engines": {
-    "node": "8.12.0"
+    "node": "8.16.0"
   },
   "description": "The web UI for Mesosphere's Marathon.",
   "main": "dist/main.js",
@@ -96,6 +96,7 @@
     "cover:prepare": "rm -Rf coverage",
     "cover:run": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --require src/test/environment/jsdom src/test/units/**/*.test.* src/test/scenarios/**/*.test.*",
     "cover:report": "npm run cover; istanbul-coveralls",
+    "cover:nyc": "nyc npm run test",
     "cover": "npm run cover:prepare; npm run cover:run"
   }
 }
