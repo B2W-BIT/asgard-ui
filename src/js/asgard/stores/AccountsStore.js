@@ -1,5 +1,4 @@
 import {EventEmitter} from "events";
-
 import AppDispatcher from "../../AppDispatcher";
 import AccountsEvents from "../events/UserEvents";
 import Util from "../../helpers/Util";

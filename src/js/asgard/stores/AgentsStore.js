@@ -1,5 +1,4 @@
 import {EventEmitter} from "events";
-
 import AppDispatcher from "../../AppDispatcher";
 import AppsStore from "../../stores/AppsStore";
 import AgentsEvents from "../events/AgentsEvents";
