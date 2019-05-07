@@ -50,13 +50,6 @@ AppDispatcher.register(function (action) {
       storeData.filter = action.data;
       AgentsStore.emit(AgentsEvents.FILTER, action.data);
       break;
-    case AgentsEvents.REQUEST_ERROR:
-      AgentsStore.emit(
-        AgentsEvents.REQUEST_ERROR,
-        action.data.body,
-        action.data.status
-      );
-      break;
   }
 });
 
