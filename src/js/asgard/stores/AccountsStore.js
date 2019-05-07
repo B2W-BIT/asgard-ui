@@ -12,11 +12,6 @@ const storeData = {
   accounts: [],
 };
 
-function processToken(accs) {
-  var acc = Util.extendObject(AccountsScheme, accs);
-  return acc;
-}
-
 var AccountsStore = Util.extendObject(EventEmitter.prototype, {
   get accounts() {
     return Util.deepCopy(storeData.accounts);
