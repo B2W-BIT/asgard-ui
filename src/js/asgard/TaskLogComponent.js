@@ -4,7 +4,7 @@ import React from "react";
 import config from "../config/config";
 import MarathonService from "../plugin/sdk/services/MarathonService";
 import DialogActions from "../actions/DialogActions";
-
+import ReactDOM from 'react-dom';
 const BLOCK_SIZE = 1024;
 let loading = 0;
 
@@ -37,7 +37,7 @@ export default React.createClass({
     this.stopPollBottom = this.stopPollBottom;
     this.startPollBottom = this.startPollBottom;
     this.startPollBottom();
-    const el = this.refs && this.refs.logView && this.refs.logView.getDOMNode();
+    const el = this.refs && this.refs.logView && ReactDOM.findDOMNode(this.refs.logView);
     const ref = this;
     let currentScrollLeft = el.scrollLeft;
 
@@ -157,7 +157,7 @@ export default React.createClass({
     }
   },
   onNewTop(logdata) {
-    const el = this.refs && this.refs.logView && this.refs.logView.getDOMNode();
+    const el = this.refs && this.refs.logView && ReactDOM.findDOMNode(this.refs.logView);
     let prevHeightScroll = el.scrollHeight;
     this.setState({
       logdata: logdata,
@@ -174,7 +174,7 @@ export default React.createClass({
     this.setState({
       logdata: logdata,
     }, () => {
-      const el = ref && ref.logView && ref.logView.getDOMNode();
+      const el = ref && ref.logView && ReactDOM.findDOMNode(this.refs.logView);
       el.scrollTop = el.scrollHeight;
     });
   },
