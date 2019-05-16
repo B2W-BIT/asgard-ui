@@ -180,7 +180,7 @@ var SlaveListComponent = React.createClass({
     var state = this.state;
     var totalUsedCpu = this.state.total.stats && this.state.total.stats.cpu_pct;
     var totalUsedRam = this.state.total.stats && this.state.total.stats.ram_pct;
-    var totalAgents = this.state.length;
+    var totalAgents = this.state.agents.length;
 
     var searchIconClassSet = classNames("icon ion-search", {
       clickable: this.state.query !== ""
