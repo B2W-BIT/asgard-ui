@@ -158,7 +158,7 @@ var Marathon = React.createClass({
   bindKeyboardShortcuts: function () {
     var router = this.context.router;
 
-    mouseGlobal("esc", function () {
+    this.mouseGlobal("esc", function () {
       if (this.state.modal != null) {
         this.handleModalDestroy();
       }
