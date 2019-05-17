@@ -63,7 +63,6 @@ var Marathon = React.createClass({
 
   onPluginStoreChange: function () {
     if (PluginStore.isPluginsLoadingFinished) {
-      // this.startPolling();
       startPoll(this.poll);
     }
   },
@@ -231,20 +230,6 @@ var Marathon = React.createClass({
 
     router.transitionTo(router.getCurrentPathname());
   },
-
-  // startPolling: function () {
-  //   if (this.interval == null) {
-  //     this.poll();
-  //     this.interval = setInterval(this.poll, config.updateInterval);
-  //   }
-  // },
-
-  // stopPolling: function () {
-  //   if (this.interval != null) {
-  //     clearInterval(this.interval);
-  //     this.interval = null;
-  //   }
-  // },
 
   resetPolling: function () {
     stopPoll();
