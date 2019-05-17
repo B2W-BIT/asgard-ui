@@ -334,7 +334,6 @@ let interval = null;
 export const startPoll = (polling) => {
   if (interval == null) {
     interval = setInterval(polling, config.updateInterval);
-    console.log("entrou e finalizou start");
   }
 };
 
@@ -342,6 +341,5 @@ export const stopPoll = () => {
   if (interval != null) {
     clearInterval(interval);
     interval = null;
-    console.log("entrou e finalizou stop");
   }
 };
