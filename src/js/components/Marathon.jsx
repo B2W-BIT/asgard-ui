@@ -64,7 +64,8 @@ var Marathon = React.createClass({
 
   onPluginStoreChange: function () {
     if (PluginStore.isPluginsLoadingFinished) {
-      this.startPolling();
+      // this.startPolling();
+      startPoll(this.poll);
     }
   },
 
@@ -137,7 +138,7 @@ var Marathon = React.createClass({
   componentWillUnmount: function () {
     PluginStore.removeListener(PluginEvents.CHANGE, this.onPluginStoreChange);
 
-    this.stopPolling();
+    stopPoll();
   },
 
   bindKeyboardShortcuts: function () {
@@ -216,23 +217,23 @@ var Marathon = React.createClass({
     router.transitionTo(router.getCurrentPathname());
   },
 
-  startPolling: function () {
-    if (this.interval == null) {
-      this.poll();
-      this.interval = setInterval(this.poll, config.updateInterval);
-    }
-  },
+  // startPolling: function () {
+  //   if (this.interval == null) {
+  //     this.poll();
+  //     this.interval = setInterval(this.poll, config.updateInterval);
+  //   }
+  // },
 
-  stopPolling: function () {
-    if (this.interval != null) {
-      clearInterval(this.interval);
-      this.interval = null;
-    }
-  },
+  // stopPolling: function () {
+  //   if (this.interval != null) {
+  //     clearInterval(this.interval);
+  //     this.interval = null;
+  //   }
+  // },
 
   resetPolling: function () {
-    this.stopPolling();
-    this.startPolling();
+    stopPoll();
+    startPoll();
   },
 
   poll: function () {
@@ -327,3 +328,20 @@ var Marathon = React.createClass({
 });
 
 export default Marathon;
+
+let interval = null;
+
+export const startPoll = (polling) => {
+  if (interval == null) {
+    interval = setInterval(polling, config.updateInterval);
+    console.log("entrou e finalizou start");
+  }
+};
+
+export const stopPoll = () => {
+  if (interval != null) {
+    clearInterval(interval);
+    interval = null;
+    console.log("entrou e finalizou stop");
+  }
+};

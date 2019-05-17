@@ -25,6 +25,8 @@ import AccountsEvents from "../asgard/events/AccountsEvents";
 import Util from "../helpers/Util";
 import SortUtil from "../helpers/SortUtil";
 
+import { startPoll, stopPoll } from '../components/Marathon';
+
 function getInitialFilterCounts(object) {
   return Object.values(object).reduce(function (memo, name) {
     memo[name] = 0;
@@ -89,9 +91,12 @@ var AppListComponent = React.createClass({
     this.setState({
       apps: AppsStore.apps,
       fetchState: States.STATE_SUCCESS,
+    }, () => {
+      startPoll();
     });
   },
   accountChange: function () {
+    stopPoll();
     this.setState({
       fetchState: States.STATE_LOADING
     });
