@@ -1,7 +1,6 @@
 import React from "react";
 import {RouteHandler} from "react-router";
 import Mousetrap from "mousetrap";
-import "mousetrap/plugins/global-bind/mousetrap-global-bind";
 
 import config from "../config/config";
 
@@ -141,10 +140,26 @@ var Marathon = React.createClass({
     stopPoll();
   },
 
+  mouseGlobal: function () {
+    Mousetrap.bindGlobal = function (keys, callback, action) {
+      Mousetrap.bind(keys, callback, action);
+
+      if (keys instanceof Array) {
+        for (var i = 0; i < keys.length; i++) {
+          _globalCallbacks[keys[i]] = true;
+        }
+        return;
+      }
+
+      _globalCallbacks[keys] = true;
+    };
+    return Mousetrap;
+  },
+
   bindKeyboardShortcuts: function () {
     var router = this.context.router;
 
-    Mousetrap.bindGlobal("esc", function () {
+    mouseGlobal("esc", function () {
       if (this.state.modal != null) {
         this.handleModalDestroy();
       }
@@ -233,7 +248,7 @@ var Marathon = React.createClass({
 
   resetPolling: function () {
     stopPoll();
-    startPoll();
+    startPoll(this.pool);
   },
 
   poll: function () {
