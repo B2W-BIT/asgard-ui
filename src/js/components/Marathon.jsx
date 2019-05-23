@@ -231,14 +231,8 @@ var Marathon = React.createClass({
     router.transitionTo(router.getCurrentPathname());
   },
 
-  resetPolling: function () {
-    stopPoll();
-    startPoll(this.pool);
-  },
-
   poll: function () {
     var state = this.state;
-
     if (state.activeAppId != null) {
       AppsActions.requestApp(state.activeAppId);
       QueueActions.requestQueue();
@@ -251,6 +245,11 @@ var Marathon = React.createClass({
     // because that data is also needed on the deployments tab badge.
     DeploymentActions.requestDeployments();
     AgentsActions.requestAgents();
+  },
+
+  resetPolling: function () {
+    stopPoll();
+    startPoll(this.poll);
   },
 
   getAboutModal: function () {
@@ -332,13 +331,14 @@ export default Marathon;
 let interval = null;
 
 export const startPoll = (polling) => {
-  if (interval == null) {
+  if (interval === null) {
+    polling();
     interval = setInterval(polling, config.updateInterval);
   }
 };
 
 export const stopPoll = () => {
-  if (interval != null) {
+  if (interval !== null) {
     clearInterval(interval);
     interval = null;
   }
