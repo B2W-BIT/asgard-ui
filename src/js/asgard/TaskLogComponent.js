@@ -4,7 +4,8 @@ import React from "react";
 import config from "../config/config";
 import MarathonService from "../plugin/sdk/services/MarathonService";
 import DialogActions from "../actions/DialogActions";
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
+
 const BLOCK_SIZE = 1024;
 let loading = 0;
 
@@ -22,15 +23,12 @@ export default React.createClass({
       loadingBottom : false,
       loadingTop : false,
       topLog : 0,
-      control: 0,
     };
   },
   componentDidMount() {
-
     this.bottomOffset = 0;
     this.topOffset = 0;
     this.logData = [];
-    this.meuTeste = 0;
     this.pollBottom = this.pollBottom;
     this.handleReadOK = this.handleReadOK;
     this.handleReadTopOK = this.handleReadTopOK;
@@ -75,9 +73,9 @@ export default React.createClass({
   },
   /* eslint-disable max-len */
   startPollBottom() {
-    const url = `tasks/${this.props.task.id}/files/read?path=${this.props.logfile}&offset=-1`;
+    // const url = `tasks/${this.props.task.id}/files/read?path=${this.props.logfile}&offset=-1`;
     MarathonService.request({
-      resource: url}
+      resource: `tasks/${this.props.task.id}/files/read?path=${this.props.logfile}&offset=-1`}
     ).success((response) => {
       const totalOffset = response.body.offset;
       this.bottomOffset = totalOffset;
@@ -128,14 +126,12 @@ export default React.createClass({
   /* eslint-enable */
 
   handleReadOK(response) {
-    const {data} = response.body;
-    const truncate = response.body.truncate;
+    const {data, truncate} = response.body;
     this.setState({loadingBottom: false});
     if (data) {
       this.bottomOffset += data.length;
       this.logData.push(data);
       if (truncate) {
-        // this.bottomOffset = data.offset;
         const totalOffset = data.offset;
         this.logData.push(
           "-----------------------------------------------------------------");
