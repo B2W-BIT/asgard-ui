@@ -35,7 +35,7 @@ export default React.createClass({
     this.stopPollBottom = this.stopPollBottom;
     this.startPollBottom = this.startPollBottom;
     this.startPollBottom();
-    const el = this.refs && this.refs.logView && ReactDOM.findDOMNode(this.refs.logView);
+    const el = this.refs.logView && ReactDOM.findDOMNode(this.refs.logView);
     const ref = this;
     let currentScrollLeft = el.scrollLeft;
 
@@ -153,7 +153,7 @@ export default React.createClass({
     }
   },
   onNewTop(logdata) {
-    const el = this.refs && this.refs.logView && ReactDOM.findDOMNode(this.refs.logView);
+    const el = this.refs.logView && ReactDOM.findDOMNode(this.refs.logView);
     let prevHeightScroll = el.scrollHeight;
     this.setState({
       logdata: logdata,
@@ -170,7 +170,7 @@ export default React.createClass({
     this.setState({
       logdata: logdata,
     }, () => {
-      const el = ref && ref.logView && ReactDOM.findDOMNode(this.refs.logView);
+      const el = ref && ref.logView && ReactDOM.findDOMNode(ref.logView);
       el.scrollTop = el.scrollHeight;
     });
   },
@@ -180,8 +180,9 @@ export default React.createClass({
   },
   handleDownload() {
     const {task, logfile} = this.props;
-    const url = `tasks/${task.id}/files/download?path=${logfile}`;
-    MarathonService.request({resource: url}
+    MarathonService.request({
+      resource: `tasks/${task.id}/files/download?path=${logfile}`
+    }
     ).success((response) => {
       Bridge.navigateTo(`${config.apiURL}${response.body.download_url}`);
     }).error((data) => {
