@@ -14,7 +14,7 @@ import TaskMesosUrlComponent from "../components/TaskMesosUrlComponent";
 import TaskFileListComponent from "../components/TaskFileListComponent";
 import HealthStatus from "../constants/HealthStatus";
 
-import TaskLogComponent from "../asgard/TaskLogComponent";
+import TaskLogComponent from "../asgard/components/TaskLogComponent";
 
 var tabsTemplate = [
   {id: "apps/:appId/:taskId", text: "Working Directory"},
