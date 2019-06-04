@@ -103,7 +103,7 @@
     "serve-notify": "export NOTIFY=true && npm run serve",
     "livereload": "export GULP_ENV=\"development\" DISABLE_SOURCE_MAP=false && gulp livereload",
     "cover:prepare": "rm -Rf coverage",
-    "cover:run": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --require src/test/environment/jsdom src/test/units/**/*.test.* src/test/scenarios/**/*.test.*",
+    "cover:run": "./node_modules/.bin/nyc npm run test",
     "cover:report": "npm run cover; istanbul-coveralls",
     "cover": "npm run cover:prepare; npm run cover:run"
   }
