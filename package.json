@@ -103,7 +103,11 @@
     "serve-notify": "export NOTIFY=true && npm run serve",
     "livereload": "export GULP_ENV=\"development\" DISABLE_SOURCE_MAP=false && gulp livereload",
     "cover:prepare": "rm -Rf coverage",
+<<<<<<< HEAD
     "cover:run": "./node_modules/.bin/nyc npm run test",
+=======
+    "cover:run": "./node_modules/.bin/nyc -e .jsx npm run test",
+>>>>>>> 3e8eaf6832f68ef7a74c6516141a51d8e743708e
     "cover:report": "npm run cover; istanbul-coveralls",
     "cover": "npm run cover:prepare; npm run cover:run"
   }

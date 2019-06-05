@@ -11,10 +11,10 @@ jobs:
           command: npm install
       - run:
           name: Run All
-          command: ./node_modules/.bin/nyc npm test
+          command: npm run cover
       - run:
           name: Cover
-          command: ./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov
+          command: ./node_modules/.bin/nyc -e .jsx report --reporter=text-lcov > coverage.lcov
       - run:
           when: on_success
           command: ./node_modules/.bin/codecov
