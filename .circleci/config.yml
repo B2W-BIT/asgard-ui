@@ -11,7 +11,7 @@ jobs:
           command: npm install
       - run:
           description: "Roda todos os testes"
-          command: "./node_modules/.bin/nyc npm test"
+          command: "./node_modules/.bin/nyc -e .jsx npm test"
       - run:
           when: on_success
           command: "./node_modules/.bin/nyc -e .jsx report --reporter=text-lcov > coverage.lcov"
