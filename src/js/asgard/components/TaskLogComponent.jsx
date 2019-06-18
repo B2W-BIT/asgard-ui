@@ -37,9 +37,9 @@ export default React.createClass({
     this.startPollBottom();
     const el = this.refs.logView && ReactDOM.findDOMNode(this.refs.logView);
     const ref = this;
-    let currentScrollLeft = el.scrollLeft;
+    let currentScrollLeft = el && el.scrollLeft;
 
-    el.addEventListener("scroll", function () {
+    el && el.addEventListener("scroll", function () {
       if (currentScrollLeft !== el.scrollLeft) {
         currentScrollLeft = el.scrollLeft;
         return;

@@ -295,7 +295,8 @@ var TaskDetailComponent = React.createClass({
       // tabs = tabs.slice(0, 1);
       volumesTab = null;
     }
-
+    console.log("MINHAS TASKS",task);
+    
     return (
       <TogglableTabsComponent className="page-body page-body-no-top"
           activeTabId={activeTabId}
