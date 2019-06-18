@@ -10,14 +10,14 @@ jobs:
           name: Install package.json
           command: npm install
       - run:
-          name: Run All
-          command: npm run cover
-      - run:
-          name: Cover
-          command: ./node_modules/.bin/nyc -e .jsx report --reporter=text-lcov > coverage.lcov
+          description: "Roda todos os testes"
+          command: "./node_modules/.bin/nyc npm test"
       - run:
           when: on_success
-          command: ./node_modules/.bin/codecov
+          command: "./node_modules/.bin/nyc -e .jsx report --reporter=text-lcov > coverage.lcov"
+      - run:
+          when: on_success
+          command: "./node_modules/.bin/codecov"
 
 
 workflows:
