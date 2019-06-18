@@ -44,6 +44,9 @@ export default React.createClass({
         currentScrollLeft = el.scrollLeft;
         return;
       }
+      else {
+        ;
+      }
       // check is scroll top
       if (el.scrollTop === 0) {
         ref.setState ({loadingTop : true}, () => {
