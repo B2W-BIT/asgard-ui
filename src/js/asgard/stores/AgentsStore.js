@@ -8,7 +8,7 @@ import AgentsScheme from "./schemes/AgentsScheme";
 const storeData = {
   agents: [],
   filter: "",
-  total: "",
+  total: [],
 };
 
 function processAgents(agents) {

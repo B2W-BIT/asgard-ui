@@ -18,12 +18,13 @@ import AppsActions from "../actions/AppsActions";
 import AppsStore from "../stores/AppsStore";
 import AppsEvents from "../events/AppsEvents";
 import QueryParamsMixin from "../mixins/QueryParamsMixin";
-
 import AccountsStore from "../asgard/stores/AccountsStore";
 import AccountsEvents from "../asgard/events/AccountsEvents";
 
 import Util from "../helpers/Util";
 import SortUtil from "../helpers/SortUtil";
+
+import { startPoll, stopPoll } from '../components/Marathon';
 
 function getInitialFilterCounts(object) {
   return Object.values(object).reduce(function (memo, name) {
@@ -89,12 +90,16 @@ var AppListComponent = React.createClass({
     this.setState({
       apps: AppsStore.apps,
       fetchState: States.STATE_SUCCESS,
+    }, () => {
+      startPoll(this.poll);
     });
   },
   accountChange: function () {
+    stopPoll();
     this.setState({
       fetchState: States.STATE_LOADING
     });
+
   },
 
   newAccount: function () {

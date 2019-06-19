@@ -4,6 +4,9 @@
 .idea/*
 *.swp
 
+#Configurações vscode
+.vscode/
+
 # npm
 node_modules/
 npm-debug.log

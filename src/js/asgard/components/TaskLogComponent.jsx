@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
-import Bridge from "../helpers/Bridge";
+import Bridge from "../../helpers/Bridge";
 import React from "react";
-import config from "../config/config";
-import MarathonService from "../plugin/sdk/services/MarathonService";
-import DialogActions from "../actions/DialogActions";
+import config from "../../config/config";
+import MarathonService from "../../plugin/sdk/services/MarathonService";
+import DialogActions from "../../actions/DialogActions";
+import ReactDOM from "react-dom";
 
 const BLOCK_SIZE = 1024;
 let loading = 0;
@@ -22,29 +23,29 @@ export default React.createClass({
       loadingBottom : false,
       loadingTop : false,
       topLog : 0,
-      control: 0,
     };
   },
   componentDidMount() {
-
     this.bottomOffset = 0;
     this.topOffset = 0;
     this.logData = [];
-    this.meuTeste = 0;
     this.pollBottom = this.pollBottom;
     this.handleReadOK = this.handleReadOK;
     this.handleReadTopOK = this.handleReadTopOK;
     this.stopPollBottom = this.stopPollBottom;
     this.startPollBottom = this.startPollBottom;
     this.startPollBottom();
-    const el = this.refs && this.refs.logView && this.refs.logView.getDOMNode();
+    const el = this.refs.logView && ReactDOM.findDOMNode(this.refs.logView);
     const ref = this;
-    let currentScrollLeft = el.scrollLeft;
+    let currentScrollLeft = el && el.scrollLeft;
 
-    el.addEventListener("scroll", function () {
+    el && el.addEventListener("scroll", function () {
       if (currentScrollLeft !== el.scrollLeft) {
         currentScrollLeft = el.scrollLeft;
         return;
+      }
+      else {
+        ;
       }
       // check is scroll top
       if (el.scrollTop === 0) {
@@ -75,9 +76,9 @@ export default React.createClass({
   },
   /* eslint-disable max-len */
   startPollBottom() {
-    const url = `tasks/${this.props.task.id}/files/read?path=${this.props.logfile}&offset=-1`;
+    // const url = `tasks/${this.props.task.id}/files/read?path=${this.props.logfile}&offset=-1`;
     MarathonService.request({
-      resource: url}
+      resource: `tasks/${this.props.task.id}/files/read?path=${this.props.logfile}&offset=-1`}
     ).success((response) => {
       const totalOffset = response.body.offset;
       this.bottomOffset = totalOffset;
@@ -128,14 +129,12 @@ export default React.createClass({
   /* eslint-enable */
 
   handleReadOK(response) {
-    const {data} = response.body;
-    const truncate = response.body.truncate;
+    const {data, truncate} = response.body;
     this.setState({loadingBottom: false});
     if (data) {
       this.bottomOffset += data.length;
       this.logData.push(data);
       if (truncate) {
-        // this.bottomOffset = data.offset;
         const totalOffset = data.offset;
         this.logData.push(
           "-----------------------------------------------------------------");
@@ -157,7 +156,7 @@ export default React.createClass({
     }
   },
   onNewTop(logdata) {
-    const el = this.refs && this.refs.logView && this.refs.logView.getDOMNode();
+    const el = this.refs.logView && ReactDOM.findDOMNode(this.refs.logView);
     let prevHeightScroll = el.scrollHeight;
     this.setState({
       logdata: logdata,
@@ -174,7 +173,7 @@ export default React.createClass({
     this.setState({
       logdata: logdata,
     }, () => {
-      const el = ref && ref.logView && ref.logView.getDOMNode();
+      const el = ref && ref.logView && ReactDOM.findDOMNode(ref.logView);
       el.scrollTop = el.scrollHeight;
     });
   },
@@ -184,8 +183,9 @@ export default React.createClass({
   },
   handleDownload() {
     const {task, logfile} = this.props;
-    const url = `tasks/${task.id}/files/download?path=${logfile}`;
-    MarathonService.request({resource: url}
+    MarathonService.request({
+      resource: `tasks/${task.id}/files/download?path=${logfile}`
+    }
     ).success((response) => {
       Bridge.navigateTo(`${config.apiURL}${response.body.download_url}`);
     }).error((data) => {

@@ -18,7 +18,7 @@ var PopoverComponent = React.createClass({
     visible: React.PropTypes.bool
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       alignment: DEFAULT_ALIGNED
     };
@@ -37,19 +37,19 @@ var PopoverComponent = React.createClass({
     );
   },
 
-  componentDidUpdate: function() {
+  componentDidUpdate: function () {
     if (this.props.visible === true) {
       this.recalculatePosition();
     }
   },
 
-  recalculatePosition: function() {
+  recalculatePosition: function () {
     if (global.window == null) {
       return;
     }
 
-    let componentNode = ReactDOM.findDOMNode(this).refs.component;
-    let contentNode = ReactDOM.findDOMNode(this).refs.content;
+    let componentNode = ReactDOM.findDOMNode(this.refs.component);
+    let contentNode = ReactDOM.findDOMNode(this.refs.content);
     let componentPosition = componentNode.getBoundingClientRect();
     let contentHeight = contentNode.clientHeight;
 
@@ -69,7 +69,7 @@ var PopoverComponent = React.createClass({
     this.setState({ alignment: DEFAULT_ALIGNED });
   },
 
-  render: function() {
+  render: function () {
     var props = this.props;
     if (!props.visible) {
       return null;
