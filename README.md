@@ -11,6 +11,10 @@ que implementa o que é necessário para termos:
 ## Changelog
 
 
+### 0.28.0
+
+ * Força campo networks no modo JSON PR [41](https://github.com/b2wdigital/asgard-ui/pull/41)
+
 ### 0.27.0
  * Task State na lista de Tasks. PR [#34](https://github.com/b2wdigital/asgard-ui/pull/34)
  * Agents :: Exibir quantidade de recursos utilizados e total. [PR #35](https://github.com/b2wdigital/asgard-ui/pull/35)
