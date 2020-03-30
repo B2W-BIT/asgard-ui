@@ -75,7 +75,7 @@ var AppVersionsStore = Util.extendObject(EventEmitter.prototype, {
         }
       }
       return memo;
-    }, {});
+    }, {networks: version.networks});
   },
 
   // Diff the new configuration against the current app settings
